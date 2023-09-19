@@ -1,11 +1,13 @@
 import heligym
+from gym.wrappers.normalize import NormalizeObservation
 import stable_baselines3
 
 heli = heligym.HeliForwardFlight()
+heli = NormalizeObservation(heli)
 model = stable_baselines3.PPO(
     policy='MlpPolicy',
     env=heli,
-    tensorboard_log='.'
+    tensorboard_log='log'
 )
 
 while True:
